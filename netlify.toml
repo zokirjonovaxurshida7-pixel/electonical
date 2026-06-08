@@ -1,0 +1,6 @@
+# Netlify sozlamalari — statik sayt (frontend)
+[build]
+  publish = "."
+
+# SPA emas, ko'p sahifali sayt bo'lgani uchun maxsus redirect shart emas.
+# Agar 404 sahifa kerak bo'lsa, 404.html qo'shishingiz mumkin.

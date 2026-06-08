@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kategoriyalar - Admin TechStore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i><span style="color:var(--white)">Tech</span>Store</a>
+      <div style="font-size:.7rem;color:var(--gray-500);margin-top:4px">Admin Panel</div>
+    </div>
+    <nav class="admin-nav">
+      <a href="index.html" class="admin-nav-item"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="products.html" class="admin-nav-item"><i class="fas fa-box"></i> Mahsulotlar</a>
+      <a href="categories.html" class="admin-nav-item active"><i class="fas fa-tags"></i> Kategoriyalar</a>
+      <a href="orders.html" class="admin-nav-item"><i class="fas fa-shopping-bag"></i> Buyurtmalar</a>
+      <a href="users.html" class="admin-nav-item"><i class="fas fa-users"></i> Foydalanuvchilar</a>
+      <a href="profile.html" class="admin-nav-item"><i class="fas fa-user-circle"></i> Profil</a>
+      <a href="../index.html" class="admin-nav-item"><i class="fas fa-store"></i> Do'konga qaytish</a>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-info">
+        <div class="avatar">A</div>
+        <div><strong id="admin-name">Admin</strong><small>Administrator</small></div>
+      </div>
+      <button class="btn btn-ghost btn-sm btn-block" id="admin-logout" style="color:var(--gray-400)">
+        <i class="fas fa-sign-out-alt"></i> Chiqish
+      </button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <h1>Kategoriyalar</h1>
+      <div class="theme-toggle-wrap">
+        <i class="fas fa-sun sun-icon"></i>
+        <button class="theme-toggle" id="theme-toggle" title="Tungi/Kunduzgi rejim"></button>
+        <i class="fas fa-moon moon-icon"></i>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <div class="admin-toolbar">
+        <div style="color:var(--gray-600)">
+          <i class="fas fa-info-circle"></i> Kategoriyalarni boshqaring
+        </div>
+        <button class="btn btn-primary" id="add-category-btn">
+          <i class="fas fa-plus"></i> Kategoriya qo'shish
+        </button>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-body">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Icon</th>
+                <th>Nomi</th>
+                <th>Slug</th>
+                <th>Tartib</th>
+                <th>Status</th>
+                <th>Amallar</th>
+              </tr>
+            </thead>
+            <tbody id="categories-tbody">
+              <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400)"><i class="fas fa-spinner fa-spin"></i> Yuklanmoqda...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- CATEGORY MODAL -->
+<div class="admin-modal" id="category-modal">
+  <div class="admin-modal-backdrop" onclick="document.getElementById('category-modal').classList.remove('active')"></div>
+  <div class="admin-modal-box" style="max-width:500px">
+    <h3 id="category-modal-title">Kategoriya qo'shish</h3>
+    <form id="category-form">
+      <div class="form-group">
+        <label class="form-label">Nomi *</label>
+        <input type="text" id="cat-name" class="form-control" required placeholder="Smartfonlar">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Slug *</label>
+        <input type="text" id="cat-slug" class="form-control" required placeholder="smartphones">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Icon (emoji) *</label>
+        <input type="text" id="cat-icon" class="form-control" required placeholder="📱" maxlength="2">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tartib raqami</label>
+        <input type="number" id="cat-order" class="form-control" value="1" min="1">
+      </div>
+      <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px">
+        <button type="button" class="btn btn-ghost" id="close-category-modal">Bekor qilish</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Saqlash</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="../js/api.js"></script>
+<script src="../js/cart.js"></script>
+<script>
+  function formatPrice(p) { return new Intl.NumberFormat('uz-UZ').format(p) + " so'm"; }
+  function showToast(msg, type='success') {
+    const c = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    t.className = `toast toast-${type}`;
+    t.innerHTML = `<i class="fas fa-${type==='success'?'check-circle':'times-circle'}"></i><span>${msg}</span>`;
+    c.appendChild(t);
+    setTimeout(() => t.classList.add('show'), 10);
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 3000);
+  }
+</script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

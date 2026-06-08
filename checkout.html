@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyurtma berish - TechStore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="nav-logo"><i class="fas fa-bolt"></i><span>Tech</span>Store</a>
+      <div style="flex:1;text-align:center">
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:.875rem;color:var(--gray-500)">
+          <span style="color:var(--success)"><i class="fas fa-check-circle"></i> Savat</span>
+          <i class="fas fa-chevron-right" style="font-size:.7rem"></i>
+          <span style="color:var(--primary);font-weight:600">Buyurtma</span>
+          <i class="fas fa-chevron-right" style="font-size:.7rem"></i>
+          <span>To'lov</span>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <button class="nav-icon-btn" id="cart-btn">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge" style="display:none">0</span>
+        </button>
+        <div class="user-menu" id="user-menu" style="display:none">
+          <button class="user-menu-btn">
+            <div class="avatar">U</div>
+            <span id="user-name">User</span>
+          </button>
+          <div class="dropdown">
+            <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Chiqish</button>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="login-btn" style="display:none"><i class="fas fa-user"></i> Kirish</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="checkout-layout">
+    <div>
+      <!-- Shipping -->
+      <div class="checkout-card">
+        <h3><span class="step-num">1</span> Yetkazib berish manzili</h3>
+        <form id="checkout-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Ism Familiya *</label>
+              <input type="text" id="sh-name" class="form-control" placeholder="To'liq ismingiz" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Telefon *</label>
+              <input type="tel" id="sh-phone" class="form-control" placeholder="+998 90 123 45 67" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ko'cha, uy *</label>
+            <input type="text" id="sh-street" class="form-control" placeholder="Ko'cha nomi, uy raqami" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Shahar *</label>
+              <input type="text" id="sh-city" class="form-control" placeholder="Toshkent" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Viloyat</label>
+              <select id="sh-region" class="form-control">
+                <option value="">Tanlang</option>
+                <option>Toshkent shahri</option>
+                <option>Toshkent viloyati</option>
+                <option>Samarqand</option>
+                <option>Buxoro</option>
+                <option>Andijon</option>
+                <option>Farg'ona</option>
+                <option>Namangan</option>
+                <option>Qashqadaryo</option>
+                <option>Surxondaryo</option>
+                <option>Xorazm</option>
+                <option>Navoiy</option>
+                <option>Jizzax</option>
+                <option>Sirdaryo</option>
+                <option>Qoraqalpog'iston</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div style="margin-top:8px">
+            <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px">
+              <span class="step-num">2</span> To'lov usuli
+            </h3>
+            <div class="payment-options">
+              <label class="payment-option">
+                <input type="radio" name="payment" value="click" checked>
+                <div class="payment-option-icon">💳</div>
+                <div class="payment-option-info">
+                  <strong>Click</strong>
+                  <small>Click ilovasi orqali to'lash</small>
+                </div>
+                <img src="https://click.uz/favicon.ico" alt="Click" style="width:32px;height:32px;margin-left:auto;border-radius:6px" onerror="this.style.display='none'">
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment" value="payme">
+                <div class="payment-option-icon">💰</div>
+                <div class="payment-option-info">
+                  <strong>Payme</strong>
+                  <small>Payme ilovasi orqali to'lash</small>
+                </div>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment" value="cash">
+                <div class="payment-option-icon">💵</div>
+                <div class="payment-option-info">
+                  <strong>Naqd pul</strong>
+                  <small>Yetkazib berganda to'lash</small>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div style="margin-top:24px">
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="place-order-btn">
+              <i class="fas fa-lock"></i> Buyurtma berish
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div>
+      <div class="order-summary-card" style="position:sticky;top:88px">
+        <h3>Buyurtma xulosasi</h3>
+        <div id="order-items" style="margin-bottom:16px;max-height:300px;overflow-y:auto"></div>
+        <div class="summary-row"><span>Mahsulotlar:</span><span id="order-subtotal">0 so'm</span></div>
+        <div class="summary-row"><span>Yetkazib berish:</span><span id="order-shipping">0 so'm</span></div>
+        <div class="summary-total"><span>Jami:</span><span style="color:var(--primary)" id="order-total">0 so'm</span></div>
+        <div style="margin-top:16px;padding:12px;background:var(--gray-50);border-radius:var(--radius-sm);font-size:.8rem;color:var(--gray-500)">
+          <i class="fas fa-shield-alt" style="color:var(--success)"></i>
+          Buyurtmangiz xavfsiz SSL orqali himoyalangan
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h3><i class="fas fa-shopping-cart"></i> Savat</h3>
+    <button class="cart-close" id="close-cart"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span>Jami:</span><span id="cart-total">0 so'm</span></div>
+  </div>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<!-- AUTH MODAL -->
+<div class="modal" id="auth-modal">
+  <div class="modal-backdrop" onclick="closeLoginModal()"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLoginModal()"><i class="fas fa-times"></i></button>
+    <div class="modal-logo"><i class="fas fa-bolt"></i><h2>Kirish kerak</h2><p>Buyurtma berish uchun kiring</p></div>
+    <div class="auth-tabs">
+      <div class="auth-tab active" data-tab="login">Kirish</div>
+      <div class="auth-tab" data-tab="register">Ro'yxatdan o'tish</div>
+    </div>
+    <form class="auth-form active" id="login-form">
+      <div class="form-group"><label class="form-label">Email</label><input type="email" id="login-email" class="form-control" required></div>
+      <div class="form-group"><label class="form-label">Parol</label><input type="password" id="login-password" class="form-control" required></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Kirish</button>
+    </form>
+    <form class="auth-form" id="register-form">
+      <div class="form-group"><label class="form-label">Ism</label><input type="text" id="reg-name" class="form-control" required></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" id="reg-email" class="form-control" required></div>
+      <div class="form-group"><label class="form-label">Telefon</label><input type="tel" id="reg-phone" class="form-control"></div>
+      <div class="form-group"><label class="form-label">Parol</label><input type="password" id="reg-password" class="form-control" required minlength="6"></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Ro'yxatdan o'tish</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/app.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

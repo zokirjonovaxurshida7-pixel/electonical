@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahsulotlar - TechStore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+      <a href="index.html" class="nav-logo"><i class="fas fa-bolt"></i><span>Tech</span>Store</a>
+      <div class="search-bar">
+        <form id="search-form">
+          <input type="text" id="search-input" placeholder="Mahsulot qidiring...">
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <nav class="nav-links" id="nav-links">
+        <a href="index.html">Bosh sahifa</a>
+        <a href="products.html" style="color:var(--primary)">Mahsulotlar</a>
+        <a href="orders.html">Buyurtmalar</a>
+        <a href="admin/index.html" id="admin-link" style="display:none;color:var(--primary)">Admin</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="nav-icon-btn" id="cart-btn">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge" style="display:none">0</span>
+        </button>
+        <button class="btn btn-primary" id="login-btn"><i class="fas fa-user"></i> Kirish</button>
+        <div class="user-menu" id="user-menu" style="display:none">
+          <button class="user-menu-btn">
+            <div class="avatar">U</div>
+            <span id="user-name">User</span>
+            <i class="fas fa-chevron-down" style="font-size:.7rem"></i>
+          </button>
+          <div class="dropdown">
+            <a href="profile.html"><i class="fas fa-user"></i> Profil</a>
+            <a href="orders.html"><i class="fas fa-box"></i> Buyurtmalarim</a>
+            <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Chiqish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="products-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="flex-between mb-4">
+        <h3 style="font-size:1rem;font-weight:700">Filtrlar</h3>
+        <button id="clear-filters" class="btn btn-ghost btn-sm">Tozalash</button>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Kategoriya</div>
+        <div id="category-filters">
+          <div class="loading-spinner" style="padding:20px"><i class="fas fa-spinner fa-spin"></i></div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Narx (so'm)</div>
+        <div class="price-inputs">
+          <input type="number" id="min-price" placeholder="Dan" class="form-control">
+          <input type="number" id="max-price" placeholder="Gacha" class="form-control">
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Brend</div>
+        <div id="brand-filters">
+          <label class="filter-checkbox"><input type="radio" name="brand" value="Apple"> Apple</label>
+          <label class="filter-checkbox"><input type="radio" name="brand" value="Samsung"> Samsung</label>
+          <label class="filter-checkbox"><input type="radio" name="brand" value="Sony"> Sony</label>
+          <label class="filter-checkbox"><input type="radio" name="brand" value="Dell"> Dell</label>
+          <label class="filter-checkbox"><input type="radio" name="brand" value="Anker"> Anker</label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main>
+      <div class="products-toolbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="btn btn-outline btn-sm filter-toggle" id="filter-toggle">
+            <i class="fas fa-filter"></i> Filtr
+          </button>
+          <span class="results-count" id="results-count">Yuklanmoqda...</span>
+        </div>
+        <select class="sort-select" id="sort-select">
+          <option value="newest">Yangi kelganlar</option>
+          <option value="popular">Eng mashhur</option>
+          <option value="price-asc">Narx: arzondan qimmatga</option>
+          <option value="price-desc">Narx: qimmatdan arzonga</option>
+          <option value="rating">Eng yuqori reyting</option>
+        </select>
+      </div>
+
+      <div class="products-grid" id="products-grid">
+        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>Yuklanmoqda...</p></div>
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+    </main>
+  </div>
+</div>
+
+<footer class="footer" style="margin-top:60px">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2024 TechStore</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h3><i class="fas fa-shopping-cart"></i> Savat</h3>
+    <button class="cart-close" id="close-cart"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>Jami:</span><span id="cart-total">0 so'm</span>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg" id="checkout-btn">
+      <i class="fas fa-lock"></i> Buyurtma berish
+    </button>
+  </div>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<!-- AUTH MODAL -->
+<div class="modal" id="auth-modal">
+  <div class="modal-backdrop" onclick="closeLoginModal()"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLoginModal()"><i class="fas fa-times"></i></button>
+    <div class="modal-logo"><i class="fas fa-bolt"></i><h2>TechStore</h2></div>
+    <div class="auth-tabs">
+      <div class="auth-tab active" data-tab="login">Kirish</div>
+      <div class="auth-tab" data-tab="register">Ro'yxatdan o'tish</div>
+    </div>
+    <form class="auth-form active" id="login-form">
+      <div class="form-group"><label class="form-label">Email</label><input type="email" id="login-email" class="form-control" placeholder="email@example.com" required></div>
+      <div class="form-group"><label class="form-label">Parol</label><input type="password" id="login-password" class="form-control" placeholder="Parolingiz" required></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Kirish</button>
+    </form>
+    <form class="auth-form" id="register-form">
+      <div class="form-group"><label class="form-label">Ism</label><input type="text" id="reg-name" class="form-control" required></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" id="reg-email" class="form-control" required></div>
+      <div class="form-group"><label class="form-label">Telefon</label><input type="tel" id="reg-phone" class="form-control"></div>
+      <div class="form-group"><label class="form-label">Parol</label><input type="password" id="reg-password" class="form-control" required minlength="6"></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Ro'yxatdan o'tish</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/app.js"></script>
+<script src="js/products.js"></script>
+<script>
+  // Brand filter
+  document.querySelectorAll('#brand-filters input').forEach(inp => {
+    inp.addEventListener('change', () => {
+      currentFilters.brand = inp.value;
+      currentFilters.page = 1;
+      fetchProducts(currentFilters);
+    });
+  });
+</script>
+</body>
+</html>

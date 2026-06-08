@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechStore - Eng yaxshi elektronika do'koni</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+      <a href="index.html" class="nav-logo">
+        <i class="fas fa-bolt"></i><span>Tech</span>Store
+      </a>
+      <div class="search-bar">
+        <form id="search-form">
+          <input type="text" id="search-input" placeholder="Mahsulot qidiring...">
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <nav class="nav-links" id="nav-links">
+        <a href="index.html">Bosh sahifa</a>
+        <a href="products.html">Mahsulotlar</a>
+        <a href="orders.html">Buyurtmalar</a>
+        <a href="admin/index.html" id="admin-link" style="display:none;color:var(--primary)">Admin</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="nav-icon-btn" id="cart-btn" title="Savat">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge" style="display:none">0</span>
+        </button>
+        <button class="btn btn-primary" id="login-btn" style="display:flex">
+          <i class="fas fa-user"></i> Kirish
+        </button>
+        <div class="user-menu" id="user-menu" style="display:none">
+          <button class="user-menu-btn">
+            <div class="avatar">U</div>
+            <span id="user-name">User</span>
+            <i class="fas fa-chevron-down" style="font-size:.7rem"></i>
+          </button>
+          <div class="dropdown">
+            <a href="profile.html"><i class="fas fa-user"></i> Profil</a>
+            <a href="orders.html"><i class="fas fa-box"></i> Buyurtmalarim</a>
+            <a href="admin/index.html" id="admin-link-drop" style="display:none"><i class="fas fa-cog"></i> Admin panel</a>
+            <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Chiqish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+<!-- Hero badge -->
+        <div class="hero-badge"><i class="fas fa-fire"></i> Yangi mahsulotlar keldi!</div>
+        <h1>Eng yaxshi <span>elektronika</span><br>
+          <span class="hero-typewriter" data-words="mahsulotlari,brendlari,narxlari"></span>
+        </h1>
+        <p>iPhone, Samsung, MacBook va boshqa premium brendlarning eng so'nggi modellari. Tez yetkazib berish va kafolat bilan.</p>
+        <div class="hero-actions">
+          <a href="products.html" class="btn btn-white btn-lg"><i class="fas fa-shopping-bag"></i> Xarid qilish</a>
+          <a href="products.html?featured=true" class="btn btn-outline-white btn-lg"><i class="fas fa-star"></i> Tavsiyalar</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>5000+</strong><span>Mahsulot</span></div>
+          <div class="hero-stat"><strong>50K+</strong><span>Mijoz</span></div>
+          <div class="hero-stat"><strong>4.9★</strong><span>Reyting</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-device">📱</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <h2 class="section-title">Kategoriyalar</h2>
+    <p class="section-subtitle">Kerakli kategoriyani tanlang</p>
+    <div class="categories-grid" id="categories-grid">
+      <div class="loading-spinner" style="grid-column:1/-1"><i class="fas fa-spinner fa-spin"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="section">
+  <div class="container">
+    <div class="flex-between mb-4">
+      <div>
+        <h2 class="section-title">Tavsiya etilgan mahsulotlar</h2>
+        <p class="section-subtitle">Eng ko'p sotilgan va yuqori baholangan mahsulotlar</p>
+      </div>
+      <a href="products.html" class="btn btn-outline">Barchasini ko'rish <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="grid-4" id="featured-grid">
+      <div class="loading-spinner" style="grid-column:1/-1"><i class="fas fa-spinner fa-spin"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO BANNER -->
+<section class="promo-banner">
+  <div class="container">
+    <h2>🔥 Katta chegirmalar! 50% gacha</h2>
+    <p>Cheklangan vaqt uchun maxsus takliflar. Endi xarid qiling!</p>
+    <a href="products.html" class="btn btn-white btn-lg">Chegirmali mahsulotlar</a>
+  </div>
+</section>
+
+<!-- NEW ARRIVALS -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <div class="flex-between mb-4">
+      <div>
+        <h2 class="section-title">Yangi kelganlar</h2>
+        <p class="section-subtitle">Eng so'nggi modellar</p>
+      </div>
+      <a href="products.html?sort=newest" class="btn btn-outline">Barchasini ko'rish <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="grid-4" id="new-grid">
+      <div class="loading-spinner" style="grid-column:1/-1"><i class="fas fa-spinner fa-spin"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="container">
+    <div class="grid-4">
+
+      <div class="feature-card" onclick="openFeatureModal('delivery')" style="text-align:center;padding:28px 20px;background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);cursor:pointer">
+        <i class="fas fa-truck" style="font-size:2.2rem;color:var(--primary);margin-bottom:14px;display:block"></i>
+        <h4 style="margin-bottom:8px;font-size:1rem">Tez yetkazib berish</h4>
+        <p style="font-size:.875rem;color:var(--gray-500)">Toshkent bo'ylab 1-2 kun ichida</p>
+        <span class="feature-more">Batafsil <i class="fas fa-arrow-right"></i></span>
+      </div>
+
+      <div class="feature-card" onclick="openFeatureModal('warranty')" style="text-align:center;padding:28px 20px;background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);cursor:pointer">
+        <i class="fas fa-shield-alt" style="font-size:2.2rem;color:var(--success);margin-bottom:14px;display:block"></i>
+        <h4 style="margin-bottom:8px;font-size:1rem">Kafolat</h4>
+        <p style="font-size:.875rem;color:var(--gray-500)">Barcha mahsulotlarga 1 yil kafolat</p>
+        <span class="feature-more">Batafsil <i class="fas fa-arrow-right"></i></span>
+      </div>
+
+      <div class="feature-card" onclick="openFeatureModal('return')" style="text-align:center;padding:28px 20px;background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);cursor:pointer">
+        <i class="fas fa-undo" style="font-size:2.2rem;color:var(--warning);margin-bottom:14px;display:block"></i>
+        <h4 style="margin-bottom:8px;font-size:1rem">Qaytarish</h4>
+        <p style="font-size:.875rem;color:var(--gray-500)">14 kun ichida qaytarish imkoniyati</p>
+        <span class="feature-more">Batafsil <i class="fas fa-arrow-right"></i></span>
+      </div>
+
+      <div class="feature-card" onclick="openFeatureModal('support')" style="text-align:center;padding:28px 20px;background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);cursor:pointer">
+        <i class="fas fa-headset" style="font-size:2.2rem;color:var(--danger);margin-bottom:14px;display:block"></i>
+        <h4 style="margin-bottom:8px;font-size:1rem">24/7 Qo'llab-quvvatlash</h4>
+        <p style="font-size:.875rem;color:var(--gray-500)">Har doim yordam berishga tayyormiz</p>
+        <span class="feature-more">Batafsil <i class="fas fa-arrow-right"></i></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE MODAL -->
+<div class="modal" id="feature-modal">
+  <div class="modal-backdrop" onclick="closeFeatureModal()"></div>
+  <div class="modal-box feature-modal-box">
+    <button class="modal-close" onclick="closeFeatureModal()"><i class="fas fa-times"></i></button>
+    <div id="feature-modal-content"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><i class="fas fa-bolt"></i><span style="color:var(--white)">Tech</span>Store</div>
+        <p>O'zbekistondagi eng yaxshi elektronika do'koni. Premium sifat, qulay narxlar va tez yetkazib berish.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Havolalar</h4>
+        <ul>
+          <li><a href="index.html">Bosh sahifa</a></li>
+          <li><a href="products.html">Mahsulotlar</a></li>
+          <li><a href="orders.html">Buyurtmalar</a></li>
+          <li><a href="profile.html">Profil</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kategoriyalar</h4>
+        <ul>
+          <li><a href="products.html?search=smartphone">Smartfonlar</a></li>
+          <li><a href="products.html?search=laptop">Noutbuklar</a></li>
+          <li><a href="products.html?search=headphone">Quloqchinlar</a></li>
+          <li><a href="products.html?search=watch">Soatlar</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Aloqa</h4>
+        <ul>
+          <li><a href="tel:+998712345678"><i class="fas fa-phone" style="margin-right:6px"></i>+998 71 234 56 78</a></li>
+          <li><a href="mailto:info@techstore.uz"><i class="fas fa-envelope" style="margin-right:6px"></i>info@techstore.uz</a></li>
+          <li><a href="#"><i class="fas fa-map-marker-alt" style="margin-right:6px"></i>Toshkent, Uzbekistan</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 TechStore. Barcha huquqlar himoyalangan.</span>
+      <span>Click va Payme orqali to'lov qabul qilinadi</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h3><i class="fas fa-shopping-cart"></i> Savat</h3>
+    <button class="cart-close" id="close-cart"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>Jami:</span>
+      <span id="cart-total">0 so'm</span>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg" id="checkout-btn">
+      <i class="fas fa-lock"></i> Buyurtma berish
+    </button>
+    <a href="cart.html" class="btn btn-ghost btn-block" style="margin-top:8px;text-align:center">
+      Savatni ko'rish
+    </a>
+  </div>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<!-- AUTH MODAL -->
+<div class="modal" id="auth-modal">
+  <div class="modal-backdrop" onclick="closeLoginModal()"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLoginModal()"><i class="fas fa-times"></i></button>
+    <div class="modal-logo">
+      <i class="fas fa-bolt"></i>
+      <h2>TechStore</h2>
+      <p>Hisobingizga kiring yoki ro'yxatdan o'ting</p>
+    </div>
+    <div class="auth-tabs">
+      <div class="auth-tab active" data-tab="login">Kirish</div>
+      <div class="auth-tab" data-tab="register">Ro'yxatdan o'tish</div>
+    </div>
+    <!-- Login Form -->
+    <form class="auth-form active" id="login-form">
+      <div class="form-group">
+        <label class="form-label">Login</label>
+        <div class="input-icon">
+          <i class="fas fa-user"></i>
+          <input type="text" id="login-email" class="form-control" placeholder="Login yoki email" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Parol</label>
+        <div class="input-icon">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="login-password" class="form-control" placeholder="Parolingiz" required>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Kirish</button>
+    </form>
+    <!-- Register Form -->
+    <form class="auth-form" id="register-form">
+      <div class="form-group">
+        <label class="form-label">Ism Familiya</label>
+        <div class="input-icon">
+          <i class="fas fa-user"></i>
+          <input type="text" id="reg-name" class="form-control" placeholder="Ismingiz" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <div class="input-icon">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="reg-email" class="form-control" placeholder="email@example.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Telefon</label>
+        <div class="input-icon">
+          <i class="fas fa-phone"></i>
+          <input type="tel" id="reg-phone" class="form-control" placeholder="+998 90 123 45 67">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Parol</label>
+        <div class="input-icon">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="reg-password" class="form-control" placeholder="Kamida 6 ta belgi" required minlength="6">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Ro'yxatdan o'tish</button>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast-container"></div>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/app.js"></script>
+<script>
+// ─── FEATURE MODAL DATA ───────────────────────────────────────────────────────
+const FEATURE_DATA = {
+  delivery: {
+    icon: 'fa-truck',
+    color: 'var(--primary)',
+    bg: 'var(--primary-light)',
+    title: 'Tez yetkazib berish',
+    subtitle: 'Toshkent bo\'ylab 1-2 kun ichida',
+    items: [
+      { icon: 'fa-map-marker-alt', text: '<strong>Toshkent shahri</strong> — 1 ish kuni ichida' },
+      { icon: 'fa-city',           text: '<strong>Viloyat markazlari</strong> — 2-3 ish kuni' },
+      { icon: 'fa-globe-asia',     text: '<strong>Butun O\'zbekiston</strong> — 3-5 ish kuni' },
+      { icon: 'fa-box-open',       text: '<strong>500,000 so\'mdan yuqori</strong> buyurtmalarda yetkazib berish <span style="color:var(--success);font-weight:700">BEPUL</span>' },
+      { icon: 'fa-money-bill',     text: 'Arzon buyurtmalarda yetkazib berish narxi — <strong>30,000 so\'m</strong>' },
+      { icon: 'fa-clock',          text: 'Ish vaqti: <strong>09:00 – 21:00</strong>, haftaning 7 kuni' },
+      { icon: 'fa-phone',          text: 'Kuryer bilan bog\'lanish: <strong>+998 71 234 56 78</strong>' },
+    ]
+  },
+  warranty: {
+    icon: 'fa-shield-alt',
+    color: 'var(--success)',
+    bg: '#d1fae5',
+    title: 'Kafolat',
+    subtitle: 'Barcha mahsulotlarga 1 yil kafolat',
+    items: [
+      { icon: 'fa-check-circle',   text: '<strong>1 yil</strong> rasmiy ishlab chiqaruvchi kafolati' },
+      { icon: 'fa-tools',          text: 'Kafolat muddatida <strong>bepul ta\'mirlash</strong>' },
+      { icon: 'fa-exchange-alt',   text: 'Nuqsonli mahsulotni <strong>almashtirish</strong> yoki <strong>pul qaytarish</strong>' },
+      { icon: 'fa-store',          text: 'Toshkentdagi <strong>3 ta servis markaz</strong>da xizmat' },
+      { icon: 'fa-file-alt',       text: 'Kafolat taloni va <strong>chek</strong> saqlab qoling' },
+      { icon: 'fa-ban',            text: 'Kafolat qo\'llanilmaydi: mexanik shikast, suv ta\'siri, o\'z-o\'zidan ta\'mirlash' },
+      { icon: 'fa-phone',          text: 'Kafolat bo\'limi: <strong>+998 71 234 56 79</strong>' },
+    ]
+  },
+  return: {
+    icon: 'fa-undo',
+    color: 'var(--warning)',
+    bg: '#fef3c7',
+    title: 'Qaytarish siyosati',
+    subtitle: '14 kun ichida qaytarish imkoniyati',
+    items: [
+      { icon: 'fa-calendar-alt',   text: 'Xarid qilgan kundan <strong>14 kun</strong> ichida qaytarish' },
+      { icon: 'fa-box',            text: 'Mahsulot <strong>original qadoqda</strong>, ishlatilmagan holda bo\'lishi kerak' },
+      { icon: 'fa-receipt',        text: '<strong>Chek yoki buyurtma raqami</strong> taqdim etilishi shart' },
+      { icon: 'fa-credit-card',    text: 'Pul <strong>3-5 ish kuni</strong> ichida kartangizga qaytariladi' },
+      { icon: 'fa-truck',          text: 'Qaytarish uchun <strong>bepul kuryer</strong> yuboramiz' },
+      { icon: 'fa-ban',            text: 'Qaytarilmaydi: dasturiy ta\'minot, quloqchinlar (gigiyena), ochilgan sarf materiallar' },
+      { icon: 'fa-envelope',       text: 'Qaytarish uchun: <strong>return@techstore.uz</strong>' },
+    ]
+  },
+  support: {
+    icon: 'fa-headset',
+    color: 'var(--danger)',
+    bg: '#fee2e2',
+    title: '24/7 Qo\'llab-quvvatlash',
+    subtitle: 'Har doim yordam berishga tayyormiz',
+    items: [
+      { icon: 'fa-phone',          text: 'Telefon: <strong>+998 71 234 56 78</strong> — 24 soat, 7 kun' },
+      { icon: 'fab fa-telegram',   text: 'Telegram: <strong>@TechStoreUZ</strong> — tezkor javob' },
+      { icon: 'fab fa-instagram',  text: 'Instagram: <strong>@techstore.uz</strong>' },
+      { icon: 'fa-envelope',       text: 'Email: <strong>support@techstore.uz</strong> — 2 soat ichida javob' },
+      { icon: 'fa-comments',       text: 'Saytdagi <strong>jonli chat</strong> — darhol javob' },
+      { icon: 'fa-store',          text: 'Ofis: <strong>Toshkent, Chilonzor, 09:00–20:00</strong>' },
+      { icon: 'fa-star',           text: 'O\'rtacha javob vaqti: <strong>5 daqiqa</strong>' },
+    ]
+  }
+};
+
+function openFeatureModal(type) {
+  const data = FEATURE_DATA[type];
+  if (!data) return;
+  document.getElementById('feature-modal-content').innerHTML = `
+    <div class="fmodal-header">
+      <div class="fmodal-icon" style="background:${data.bg}">
+        <i class="fas ${data.icon}" style="color:${data.color}"></i>
+      </div>
+      <div>
+        <h2 class="fmodal-title">${data.title}</h2>
+        <p class="fmodal-subtitle">${data.subtitle}</p>
+      </div>
+    </div>
+    <ul class="fmodal-list">
+      ${data.items.map(item => `
+        <li class="fmodal-item">
+          <span class="fmodal-item-icon" style="color:${data.color}">
+            <i class="${item.icon.startsWith('fab') ? item.icon : 'fas ' + item.icon}"></i>
+          </span>
+          <span>${item.text}</span>
+        </li>`).join('')}
+    </ul>
+    <button class="btn btn-primary btn-block" style="margin-top:24px" onclick="closeFeatureModal()">
+      <i class="fas fa-check"></i> Tushunarli
+    </button>`;
+  document.getElementById('feature-modal').classList.add('active');
+}
+
+function closeFeatureModal() {
+  document.getElementById('feature-modal').classList.remove('active');
+}
+</script>
+</body>
+</html>

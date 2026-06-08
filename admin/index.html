@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - TechStore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/theme.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="admin-layout">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i><span style="color:var(--white)">Tech</span>Store</a>
+      <div style="font-size:.7rem;color:var(--gray-500);margin-top:4px">Admin Panel</div>
+    </div>
+    <nav class="admin-nav">
+      <a href="index.html" class="admin-nav-item active"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="products.html" class="admin-nav-item"><i class="fas fa-box"></i> Mahsulotlar</a>
+      <a href="categories.html" class="admin-nav-item"><i class="fas fa-tags"></i> Kategoriyalar</a>
+      <a href="orders.html" class="admin-nav-item"><i class="fas fa-shopping-bag"></i> Buyurtmalar</a>
+      <a href="users.html" class="admin-nav-item"><i class="fas fa-users"></i> Foydalanuvchilar</a>
+      <a href="profile.html" class="admin-nav-item"><i class="fas fa-user-circle"></i> Profil</a>
+      <a href="../index.html" class="admin-nav-item"><i class="fas fa-store"></i> Do'konga qaytish</a>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-info">
+        <div class="avatar">A</div>
+        <div>
+          <strong id="admin-name">Admin</strong>
+          <small>Administrator</small>
+        </div>
+      </div>
+      <button class="btn btn-ghost btn-sm btn-block" id="admin-logout" style="color:var(--gray-400)">
+        <i class="fas fa-sign-out-alt"></i> Chiqish
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <h1>Dashboard</h1>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:.875rem;color:var(--gray-500)" id="current-date"></span>
+        <div class="theme-toggle-wrap">
+          <i class="fas fa-sun sun-icon"></i>
+          <button class="theme-toggle" id="theme-toggle" title="Tungi/Kunduzgi rejim"></button>
+          <i class="fas fa-moon moon-icon"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fas fa-dollar-sign"></i></div>
+          <div class="stat-info">
+            <label>Jami daromad</label>
+            <strong id="stat-revenue">...</strong>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-shopping-bag"></i></div>
+          <div class="stat-info">
+            <label>Buyurtmalar</label>
+            <strong id="stat-orders">...</strong>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon yellow"><i class="fas fa-box"></i></div>
+          <div class="stat-info">
+            <label>Mahsulotlar</label>
+            <strong id="stat-products">...</strong>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple"><i class="fas fa-users"></i></div>
+          <div class="stat-info">
+            <label>Foydalanuvchilar</label>
+            <strong id="stat-users">...</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart + Top Products -->
+      <div class="admin-grid-2">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i class="fas fa-chart-bar" style="color:var(--primary)"></i> Oylik daromad</h3>
+          </div>
+          <div style="padding:20px">
+            <canvas id="revenue-chart" height="200"></canvas>
+          </div>
+        </div>
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i class="fas fa-fire" style="color:var(--danger)"></i> Top mahsulotlar</h3>
+          </div>
+          <div class="admin-card-body" id="top-products-list">
+            <div class="loading-spinner" style="padding:30px"><i class="fas fa-spinner fa-spin"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Orders -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3><i class="fas fa-clock" style="color:var(--warning)"></i> So'nggi buyurtmalar</h3>
+          <a href="orders.html" class="btn btn-outline btn-sm">Barchasini ko'rish</a>
+        </div>
+        <div class="admin-card-body">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Buyurtma #</th>
+                <th>Mijoz</th>
+                <th>Summa</th>
+                <th>To'lov</th>
+                <th>Status</th>
+                <th>Sana</th>
+              </tr>
+            </thead>
+            <tbody id="recent-orders-tbody">
+              <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--gray-400)"><i class="fas fa-spinner fa-spin"></i></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="../js/api.js"></script>
+<script src="../js/cart.js"></script>
+<script>
+  function formatPrice(p) { return new Intl.NumberFormat('uz-UZ').format(p) + " so'm"; }
+  function showToast(msg, type='success') {
+    const c = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    t.className = `toast toast-${type}`;
+    t.innerHTML = `<i class="fas fa-${type==='success'?'check-circle':'times-circle'}"></i><span>${msg}</span>`;
+    c.appendChild(t);
+    setTimeout(() => t.classList.add('show'), 10);
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 3000);
+  }
+  document.getElementById('current-date').textContent = new Date().toLocaleDateString('uz-UZ', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  // Theme toggle icon sync
+  document.addEventListener('DOMContentLoaded', () => {
+    const t = document.getElementById('theme-toggle');
+    if (t) t.addEventListener('click', () => { if(window.Theme) Theme.toggle(); });
+  });
+</script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyurtma qabul qilindi - TechStore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="nav-logo"><i class="fas fa-bolt"></i><span>Tech</span>Store</a>
+    </div>
+  </div>
+</header>
+
+<div class="container success-page">
+  <div class="success-card">
+    <div class="success-icon"><i class="fas fa-check"></i></div>
+    <h2>Buyurtmangiz qabul qilindi!</h2>
+    <p>Rahmat! Buyurtmangiz muvaffaqiyatli joylashtirildi.</p>
+    <p>Tez orada siz bilan bog'lanamiz.</p>
+    <div class="order-num-display" id="order-num-display">
+      Yuklanmoqda...
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+      <a href="orders.html" class="btn btn-primary btn-lg">
+        <i class="fas fa-box"></i> Buyurtmalarimni ko'rish
+      </a>
+      <a href="index.html" class="btn btn-outline btn-lg">
+        <i class="fas fa-home"></i> Bosh sahifaga qaytish
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const orderNumber = params.get('orderNumber');
+  const orderId = params.get('orderId');
+  const el = document.getElementById('order-num-display');
+  if (orderNumber) {
+    el.textContent = 'Buyurtma raqami: ' + orderNumber;
+  } else if (orderId) {
+    el.textContent = 'Buyurtma ID: ' + orderId;
+  } else {
+    el.textContent = 'Buyurtma muvaffaqiyatli joylashtirildi';
+  }
+  Cart.clear();
+</script>
+</body>
+</html>

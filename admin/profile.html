@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil - Admin TechStore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i><span style="color:var(--white)">Tech</span>Store</a>
+      <div style="font-size:.7rem;color:var(--gray-500);margin-top:4px">Admin Panel</div>
+    </div>
+    <nav class="admin-nav">
+      <a href="index.html" class="admin-nav-item"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="products.html" class="admin-nav-item"><i class="fas fa-box"></i> Mahsulotlar</a>
+      <a href="categories.html" class="admin-nav-item"><i class="fas fa-tags"></i> Kategoriyalar</a>
+      <a href="orders.html" class="admin-nav-item"><i class="fas fa-shopping-bag"></i> Buyurtmalar</a>
+      <a href="users.html" class="admin-nav-item"><i class="fas fa-users"></i> Foydalanuvchilar</a>
+      <a href="profile.html" class="admin-nav-item active"><i class="fas fa-user-circle"></i> Profil</a>
+      <a href="../index.html" class="admin-nav-item"><i class="fas fa-store"></i> Do'konga qaytish</a>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-info">
+        <div class="avatar">A</div>
+        <div><strong id="admin-name">Admin</strong><small>Administrator</small></div>
+      </div>
+      <button class="btn btn-ghost btn-sm btn-block" id="admin-logout" style="color:var(--gray-400)">
+        <i class="fas fa-sign-out-alt"></i> Chiqish
+      </button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <h1>Profil</h1>
+      <div class="theme-toggle-wrap">
+        <i class="fas fa-sun sun-icon"></i>
+        <button class="theme-toggle" id="theme-toggle" title="Tungi/Kunduzgi rejim"></button>
+        <i class="fas fa-moon moon-icon"></i>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <div class="grid-2" style="gap:24px">
+        <!-- Profile Info Card -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i class="fas fa-user" style="color:var(--primary)"></i> Profil ma'lumotlari</h3>
+          </div>
+          <div class="admin-card-body">
+            <div style="text-align:center;padding:20px 0">
+              <div class="profile-avatar-large" id="profile-avatar">A</div>
+              <h2 id="profile-name" style="margin:16px 0 4px">Admin User</h2>
+              <p style="color:var(--gray-500)" id="profile-email">admin@techstore.uz</p>
+              <span class="role-badge role-admin" style="margin-top:8px;display:inline-block">Administrator</span>
+            </div>
+            
+            <div style="border-top:1px solid var(--gray-200);padding-top:20px;margin-top:20px">
+              <div class="profile-info-row">
+                <span class="profile-info-label"><i class="fas fa-phone"></i> Telefon:</span>
+                <span class="profile-info-value" id="profile-phone">-</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-label"><i class="fas fa-calendar"></i> Ro'yxatdan o'tgan:</span>
+                <span class="profile-info-value" id="profile-created">-</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-label"><i class="fas fa-clock"></i> Oxirgi yangilanish:</span>
+                <span class="profile-info-value" id="profile-updated">-</span>
+              </div>
+              <div class="profile-info-row">
+                <span class="profile-info-label"><i class="fas fa-shield-alt"></i> Status:</span>
+                <span class="profile-info-value"><span class="status-badge status-paid">Faol</span></span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-block" style="margin-top:20px" onclick="openEditProfile()">
+              <i class="fas fa-edit"></i> Profilni tahrirlash
+            </button>
+          </div>
+        </div>
+
+        <!-- Change Password Card -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i class="fas fa-lock" style="color:var(--warning)"></i> Parolni o'zgartirish</h3>
+          </div>
+          <div class="admin-card-body">
+            <form id="change-password-form">
+              <div class="form-group">
+                <label class="form-label">Joriy parol</label>
+                <div class="input-icon">
+                  <i class="fas fa-lock"></i>
+                  <input type="password" id="current-password" class="form-control" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Yangi parol</label>
+                <div class="input-icon">
+                  <i class="fas fa-key"></i>
+                  <input type="password" id="new-password" class="form-control" required minlength="6">
+                </div>
+                <small style="color:var(--gray-500)">Kamida 6 ta belgi</small>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Yangi parolni tasdiqlang</label>
+                <div class="input-icon">
+                  <i class="fas fa-key"></i>
+                  <input type="password" id="confirm-password" class="form-control" required minlength="6">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-warning btn-block">
+                <i class="fas fa-save"></i> Parolni o'zgartirish
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Stats -->
+      <div class="admin-card" style="margin-top:24px">
+        <div class="admin-card-header">
+          <h3><i class="fas fa-chart-pie" style="color:var(--success)"></i> Faoliyat statistikasi</h3>
+        </div>
+        <div class="admin-card-body">
+          <div class="stats-grid" style="grid-template-columns:repeat(4,1fr)">
+            <div class="stat-card">
+              <div class="stat-icon blue"><i class="fas fa-box"></i></div>
+              <div class="stat-info">
+                <label>Qo'shilgan mahsulotlar</label>
+                <strong id="stat-products-added">0</strong>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+              <div class="stat-info">
+                <label>Tasdiqlangan buyurtmalar</label>
+                <strong id="stat-orders-confirmed">0</strong>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon yellow"><i class="fas fa-users"></i></div>
+              <div class="stat-info">
+                <label>Jami foydalanuvchilar</label>
+                <strong id="stat-total-users">0</strong>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon purple"><i class="fas fa-calendar"></i></div>
+              <div class="stat-info">
+                <label>Bugungi buyurtmalar</label>
+                <strong id="stat-today-orders">0</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="admin-modal" id="edit-profile-modal">
+  <div class="admin-modal-backdrop" onclick="closeEditProfile()"></div>
+  <div class="admin-modal-box" style="max-width:500px">
+    <h3>Profilni tahrirlash</h3>
+    <form id="edit-profile-form">
+      <div class="form-group">
+        <label class="form-label">Ism Familiya *</label>
+        <input type="text" id="edit-name" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email *</label>
+        <input type="email" id="edit-email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Telefon</label>
+        <input type="tel" id="edit-phone" class="form-control" placeholder="+998 90 123 45 67">
+      </div>
+      <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px">
+        <button type="button" class="btn btn-ghost" onclick="closeEditProfile()">Bekor qilish</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Saqlash</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="../js/api.js"></script>
+<script src="../js/cart.js"></script>
+<script>
+  function formatPrice(p) { return new Intl.NumberFormat('uz-UZ').format(p) + " so'm"; }
+  function showToast(msg, type='success') {
+    const c = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    t.className = `toast toast-${type}`;
+    t.innerHTML = `<i class="fas fa-${type==='success'?'check-circle':'times-circle'}"></i><span>${msg}</span>`;
+    c.appendChild(t);
+    setTimeout(() => t.classList.add('show'), 10);
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 3000);
+  }
+
+  // Load profile
+  async function loadProfile() {
+    try {
+      const { user } = await api.get('/auth/me');
+      
+      // Update profile info
+      document.getElementById('profile-name').textContent = user.name;
+      document.getElementById('profile-email').textContent = user.email;
+      document.getElementById('profile-phone').textContent = user.phone || '-';
+      document.getElementById('profile-created').textContent = new Date(user.createdAt).toLocaleDateString('uz-UZ');
+      document.getElementById('profile-updated').textContent = new Date(user.updatedAt).toLocaleDateString('uz-UZ');
+      
+      // Update avatar
+      const avatar = user.name[0].toUpperCase();
+      document.getElementById('profile-avatar').textContent = avatar;
+      document.getElementById('admin-name').textContent = user.name;
+
+      // Load stats
+      loadStats();
+    } catch (err) {
+      showToast(err.message, 'error');
+    }
+  }
+
+  async function loadStats() {
+    try {
+      const data = await api.get('/admin/stats');
+      document.getElementById('stat-products-added').textContent = data.totalProducts || 0;
+      document.getElementById('stat-orders-confirmed').textContent = data.totalOrders || 0;
+      document.getElementById('stat-total-users').textContent = data.totalUsers || 0;
+      
+      // Today's orders (mock for now)
+      document.getElementById('stat-today-orders').textContent = Math.floor(Math.random() * 10);
+    } catch (err) {
+      console.error('Stats error:', err);
+    }
+  }
+
+  function openEditProfile() {
+    const user = api.getUser();
+    document.getElementById('edit-name').value = user.name;
+    document.getElementById('edit-email').value = user.email;
+    document.getElementById('edit-phone').value = user.phone || '';
+    document.getElementById('edit-profile-modal').classList.add('active');
+  }
+
+  function closeEditProfile() {
+    document.getElementById('edit-profile-modal').classList.remove('active');
+  }
+
+  async function handleEditProfile(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type=submit]');
+    const name = document.getElementById('edit-name').value;
+    const phone = document.getElementById('edit-phone').value;
+    
+    try {
+      btn.disabled = true;
+      const { user } = await api.put('/auth/profile', { name, phone });
+      
+      // Update local storage
+      api.setAuth(api.getToken(), user);
+      
+      showToast('Profil yangilandi');
+      closeEditProfile();
+      loadProfile();
+    } catch (err) {
+      showToast(err.message, 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function handleChangePassword(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type=submit]');
+    const currentPassword = document.getElementById('current-password').value;
+    const newPassword = document.getElementById('new-password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+
+    if (newPassword !== confirmPassword) {
+      showToast('Yangi parollar mos kelmadi', 'error');
+      return;
+    }
+
+    try {
+      btn.disabled = true;
+      await api.put('/auth/change-password', { currentPassword, newPassword });
+      showToast('Parol muvaffaqiyatli o\'zgartirildi');
+      e.target.reset();
+    } catch (err) {
+      showToast(err.message, 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  function adminLogout() {
+    api.clearAuth();
+    window.location.href = '../index.html';
+  }
+
+  // Init
+  document.addEventListener('DOMContentLoaded', () => {
+    const user = api.getUser();
+    if (!user || user.role !== 'admin') {
+      window.location.href = '../index.html';
+      return;
+    }
+
+    loadProfile();
+
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      if (window.Theme) Theme.toggle();
+    });
+
+    document.getElementById('edit-profile-form')?.addEventListener('submit', handleEditProfile);
+    document.getElementById('change-password-form')?.addEventListener('submit', handleChangePassword);
+    document.getElementById('admin-logout')?.addEventListener('click', adminLogout);
+  });
+</script>
+</body>
+</html>
